@@ -1,4 +1,10 @@
+#ifndef XLLIB_MUTEX
+#define XLLIB_MUTEX
+
 #include <mutex>
+
+namespace xllib
+{
 
 class MutexLockGuard
 {
@@ -16,3 +22,6 @@ public:
 private:
   std::mutex &m_mutex;
 };
+
+}
+#endif
