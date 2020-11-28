@@ -63,17 +63,23 @@ void testString()
 class A
 {
 public:
+  A(string name) : m_name(name)
+  {
+  }
   void out()
   {
-    cout << "out" << endl;
+    cout << "out:" << m_name << endl;
   }
   ~A()
   {
-    cout << "~A()" << endl;
+    cout << "~A():" << m_name << endl;
   }
+
+private:
+  string m_name;
 };
 
-shared_ptr<A> g_ptr(new A());
+shared_ptr<A> g_ptr(new A("global"));
 std::mutex g_mutex;
 
 void doit(const shared_ptr<A> &pa)
@@ -93,10 +99,12 @@ void readSharedPtr()
 
 void writeSharedPtr()
 {
-  shared_ptr<A> newpa(new A);
+  shared_ptr<A> newpa(new A("localnew"));
+  shared_ptr<A> saveptr(g_ptr);
   { //less lock range
     xllib::MutexLockGuard guard(g_mutex);
     g_ptr = newpa; //write to global ptr
+    cout << "lock range\n";
   }
   doit(newpa); //use new, don't need lock(to shared_ptr, not A obj)
 }
@@ -104,7 +112,7 @@ void writeSharedPtr()
 int main()
 {
   //testString();
-  readSharedPtr();
+  //readSharedPtr();
   writeSharedPtr();
   return 0;
 }

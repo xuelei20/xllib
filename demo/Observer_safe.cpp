@@ -85,11 +85,11 @@ int main()
 {
   Observable subject;
 
-  shared_ptr<Foo> pfoo(new Foo);
-  pfoo->Observe(&subject);
+  shared_ptr<Foo> pFoo(new Foo);
+  pFoo->Observe(&subject);
   {
-    shared_ptr<Lead> plead(new Lead);
-    plead->Observe(&subject);
+    shared_ptr<Lead> pLead(new Lead);
+    pLead->Observe(&subject);
     subject.Notify();
   }
 
