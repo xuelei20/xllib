@@ -47,14 +47,15 @@ int main()
   std::function<int(int,int,int)> func2 = std::bind(&add, _2, _1, _3);
   func2(11, 22, 33);
 
-  std::function<int(int,int,int)> func22 = std::bind(&add, _1, 20, _3);
-  func22(11, 0, 33);
+  cout << "LINE:" << __LINE__ << endl;
+  std::function<int(int,int,int)> func22 = std::bind(&add, 11, _2, _3);
+  func22(0, 22, 33);
 
   funCall(111, 222, 333, func2);
   funCall(111, 222, 333, std::bind(&mul, _1, _2, _3));
 
   A obja(99);
-  function<double(int,double)> func3 = bind(&A::funA, &obja, _1, _2);
+  function<double(int,double)> func3 = bind(&A::funA, &obja, _1, _2); //obj addr is first param
   func3(10, 22.2);
 
   return 0;

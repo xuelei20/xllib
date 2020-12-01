@@ -6,15 +6,15 @@
 namespace xllib
 {
 
-class MutexLockGuard
+class MutexGuard
 {
 public:
-  MutexLockGuard(std::mutex &mutex)
+  MutexGuard(std::mutex &mutex)
     : m_mutex(mutex)
   {
     m_mutex.lock();
   }
-  ~MutexLockGuard()
+  ~MutexGuard()
   {
     m_mutex.unlock();
   }

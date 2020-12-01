@@ -22,6 +22,7 @@ int main()
   save(pFoo); //const refrence
 
   shared_ptr<void> pVoid(new Foo); //can hold any type ptr, and can release safe.
+  pVoid.reset(new Foo());
 
   return 0;
 }
