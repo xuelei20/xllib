@@ -6,7 +6,7 @@ using namespace std;
 
 pthread_mutex_t g_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-void funcA()
+void show()
 {
   pthread_mutex_lock(&g_mutex);
   while (true)
@@ -17,19 +17,19 @@ void funcA()
   pthread_mutex_unlock(&g_mutex);
 }
 
-void func1()
+void Thread1func()
 {
   pthread_mutex_lock(&g_mutex);
   while (true)
   {
     cout << __FUNCTION__ << endl;
     sleep(1);
-    funcA();
+    show();
   }
   pthread_mutex_unlock(&g_mutex);
 }
 
-void func2()
+void Thread2func()
 {
   pthread_mutex_lock(&g_mutex);
   while (true)
@@ -43,8 +43,8 @@ void func2()
 
 int main()
 {
-  thread thr1(func1);
-  thread thr2(func2);
+  thread thr1(Thread1func);
+  thread thr2(Thread2func);
   thr1.join();
   thr2.join();
   return 0;

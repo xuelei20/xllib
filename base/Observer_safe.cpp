@@ -1,3 +1,4 @@
+//OO is not fit at Observer
 #include <vector>
 #include <iostream>
 #include <algorithm>
