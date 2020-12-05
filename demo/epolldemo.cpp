@@ -1,6 +1,7 @@
+#include <stdio.h>
+
 #include <sys/epoll.h>
 #include <unistd.h>
-#include <stdio.h>
 #include <arpa/inet.h>
 #include <ctype.h>
 

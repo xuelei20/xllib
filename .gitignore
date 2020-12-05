@@ -1,3 +1,6 @@
 a.out
 .ccls-cache
 core
+base/bin
+demo/bin
+test/bin

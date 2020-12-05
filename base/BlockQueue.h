@@ -1,37 +1,48 @@
+// thread-safe
+#ifndef XLLIB_BLOCKQUEUE_H
+#define XLLIB_BLOCKQUEUE_H
+
+#include "noncopyable.h"
+#include "Mutex.h"
+#include "Condition.h"
+
 #include <queue>
-#include <mutex>
-#include <condition_variable>
 
 namespace xllib
 {
 
 template<typename T>
-class BlockQueue
+class BlockQueue : noncopyable
 {
 public:
-  void enqueue(T &data)
+  BlockQueue()
   {
-    std::unique_lock<std::mutex> ulock(m_mutex);
-    m_datas.push(data);
-    m_cond.notify_one();
   }
 
-  T &dequeue()
+  void put(T& data)
   {
-    std::unique_lock<std::mutex> ulock(m_mutex);
+    MutexGuard guard(m_mutex);
+    m_datas.push(data);
+    m_cond.notify();
+  }
+
+  T& take()
+  {
+    MutexGuard guard(m_mutex);
     while (m_datas.empty()) // must use while, must in lock
     {
-      m_cond.wait(ulock); // auto unlock, and if return auto lock
+      m_cond.wait(m_mutex); // auto unlock, and if return auto lock
     }
-    T &data = m_datas.front();
+    T& data = m_datas.front();
     m_datas.pop();
     return data;
   }
 
 private:
   std::queue<T> m_datas;
-  std::mutex m_mutex;
-  std::condition_variable m_cond;
+  Mutex m_mutex;
+  Condition m_cond;
 };
 
 }
+#endif
