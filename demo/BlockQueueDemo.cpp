@@ -1,4 +1,4 @@
-#include "../base/BlockQueue.h"
+#include "../comm/BlockQueue.h"
 
 #include <thread>
 #include <string>

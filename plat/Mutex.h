@@ -2,7 +2,7 @@
 #ifndef XLLIB_MUTEX_H
 #define XLLIB_MUTEX_H
 
-#include "noncopyable.h"
+#include "../base/noncopyable.h"
 
 #include <pthread.h>
 #include <assert.h>

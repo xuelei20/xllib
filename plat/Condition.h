@@ -2,7 +2,7 @@
 #ifndef XLLIB_CONDITION_H
 #define XLLIB_CONDITION_H
 
-#include "noncopyable.h"
+#include "../base/noncopyable.h"
 #include "Mutex.h"
 
 namespace xllib

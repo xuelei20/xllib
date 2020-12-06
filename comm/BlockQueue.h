@@ -2,9 +2,9 @@
 #ifndef XLLIB_BLOCKQUEUE_H
 #define XLLIB_BLOCKQUEUE_H
 
-#include "noncopyable.h"
-#include "Mutex.h"
-#include "Condition.h"
+#include "../base/noncopyable.h"
+#include "../plat/Mutex.h"
+#include "../plat/Condition.h"
 
 #include <queue>
 
