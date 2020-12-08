@@ -115,8 +115,20 @@ class Singleton
 public:
   static T* instance()
   {
-    static T data;
+    static T data; // thread-safe?
     return &data;
+  }
+};
+
+// version7: c++11, reference. ok
+template<typename T>
+class SingletonRef
+{
+public:
+  static T& instance()
+  {
+    static T data;
+    return data;
   }
 };
 
