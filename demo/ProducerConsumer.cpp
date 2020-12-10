@@ -1,4 +1,4 @@
-#include "../comm/BlockQueue.h"
+#include "../comm/BlockingQueue.h"
 
 #include <thread>
 #include <string>
@@ -7,7 +7,7 @@
 
 #include <unistd.h>
 
-xllib::BlockQueue<std::string> g_blockqueue;
+xllib::BlockingQueue<std::string> g_blockqueue;
 
 void Producer()
 {

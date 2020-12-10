@@ -1,6 +1,6 @@
 // thread-safe
-#ifndef XLLIB_BLOCKQUEUE_H
-#define XLLIB_BLOCKQUEUE_H
+#ifndef XLLIB_BLOCKINGQUEUE_H
+#define XLLIB_BLOCKINGQUEUE_H
 
 #include "../base/noncopyable.h"
 #include "../plat/Mutex.h"
@@ -12,10 +12,10 @@ namespace xllib
 {
 
 template<typename T>
-class BlockQueue : noncopyable
+class BlockingQueue : noncopyable
 {
 public:
-  BlockQueue()
+  BlockingQueue()
   {
   }
 
@@ -26,15 +26,15 @@ public:
     m_cond.notify();
   }
 
-  T& take()
+  T take()
   {
     MutexGuard guard(m_mutex);
     while (m_datas.empty()) // must use while, must in lock
     {
       m_cond.wait(m_mutex); // auto unlock, and if return auto lock
     }
-    T& data = m_datas.front();
-    m_datas.pop();
+    T data = m_datas.front();
+    m_datas.pop(); // WARNING: after pop, can't use T& reference!
     return data;
   }
 
