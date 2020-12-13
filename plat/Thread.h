@@ -2,6 +2,7 @@
 #define XLLIB_THREAD_H
 
 #include "../base/noncopyable.h"
+#include "../plat/xldefine.h"
 
 #include <functional>
 
@@ -10,7 +11,7 @@
 namespace xllib
 {
 
-void *xllibStartThread(void *arg);
+void *globalThreadFunc(void *arg);
 
 class Thread : noncopyable
 {
@@ -33,7 +34,7 @@ public:
 
   void start()
   {
-    pthread_create(&m_tid, NULL, xllibStartThread, this);
+    pthread_create(&m_tid, NULL, globalThreadFunc, this);
   }
 
   int join()
@@ -58,9 +59,10 @@ private:
   bool m_running;
 };
 
-void *xllibStartThread(void *arg)
+void *globalThreadFunc(void *arg)
 {
   Thread *pthr = static_cast<Thread *>(arg);
+  XL_ASSERT(pthr != NULL);
   pthr->runInThread();
   return NULL;
 }

@@ -3,6 +3,7 @@
 #define XLLIB_MUTEX_H
 
 #include "../base/noncopyable.h"
+#include "../plat/xldefine.h"
 
 #include <pthread.h>
 #include <assert.h>
@@ -21,7 +22,7 @@ public:
 
   ~Mutex()
   {
-    assert(0 == m_holder);
+    XL_ASSERT(0 == m_holder);
     pthread_mutex_destroy(&m_mutex);
   }
 

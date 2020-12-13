@@ -4,6 +4,7 @@
 
 #include "../base/noncopyable.h"
 #include "../plat/Thread.h"
+#include "../plat/xldefine.h"
 #include "TaskQueue.h"
 
 #include <vector>
@@ -29,8 +30,7 @@ public:
 
   void start()
   {
-    if (m_running)
-      return;
+    XL_ASSERT(!m_running);
 
     m_running = true;
     for (int i=0; i<m_threadNum; ++i)

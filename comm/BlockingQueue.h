@@ -33,6 +33,7 @@ public:
     {
       m_cond.wait(m_mutex); // auto unlock, and if return auto lock
     }
+    // must not be empty
     T data = m_datas.front();
     m_datas.pop(); // WARNING: after pop, can't use T& reference!
     return data;
