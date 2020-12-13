@@ -1,5 +1,7 @@
 #include "../comm/ThreadPool.h"
 
+#include <thread>
+
 #include <unistd.h>
 #include <stdio.h>
 
@@ -22,15 +24,21 @@ void mul()
 class Foo
 {
 public:
+  Foo(int n) :
+    m_num(n)
+  {
+  }
   void print()
   {
-    printf("hello\n");
+    printf("hello %d\n", m_num);
   }
+private:
+  int m_num;
 };
 
 void testClassThread()
 {
-  Foo foo;
+  Foo foo(1);
   std::thread thr(&Foo::print, foo);
   thr.join();
 }
@@ -43,10 +51,14 @@ void testThreadPool()
   std::function<void()> func = std::bind(add);
   threadPool.postTask(func);
   threadPool.postTask(func);
-  std::function<void()> func2 = std::bind(mul);
-  threadPool.postTask(func2);
 
-  sleep(2); //wait do work
+  {
+    Foo foo(2); // life time?
+    std::function<void()> func2 = std::bind(&Foo::print, foo);
+    threadPool.postTask(func2);
+  }
+
+  sleep(5); //wait do work
   threadPool.stop();
 }
 

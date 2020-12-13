@@ -41,6 +41,13 @@ private:
 
 int main()
 {
+  std::function<int(int,int,int)> funadd = add;
+  funadd(1,2,3);
+
+  // std::function<int(int,int)> funadd2 = add; // compile error
+  std::function<int()> funcadd2 = std::bind(&add, 3, 2, 1);
+  funcadd2();
+
   auto func1 = std::bind(&add, _1, 20, 30);
   func1(10);
 

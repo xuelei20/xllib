@@ -1,21 +1,19 @@
+// not completed
 #ifndef XLLIB_THREADPOOL_H
 #define XLLIB_THREADPOOL_H
 
 #include "../base/noncopyable.h"
+#include "../plat/Thread.h"
 #include "TaskQueue.h"
 
 #include <vector>
-#include <thread>
 #include <memory>
 #include <iostream>
 
+#include <unistd.h>
+
 namespace xllib
 {
-
-void doWork()
-{
-  std::cout << "doWork" << std::endl;
-}
 
 class ThreadPool : noncopyable
 {
@@ -38,7 +36,9 @@ public:
     for (int i=0; i<m_threadNum; ++i)
     {
       // m_threads.emplace_back(new std::thread(doWork));
-      m_threads.emplace_back(new std::thread(&ThreadPool::doTask, this)); // WARNING: cant' in construct pass this pointer!
+      m_threads.emplace_back(new xllib::Thread(
+        std::bind(&ThreadPool::doTask, this))); // WARNING: cant' in construct pass this pointer!
+      m_threads[i]->start();
     }
   }
 
@@ -70,14 +70,18 @@ private:
     while (m_running)
     {
       TaskQueue::Task func = m_tasks.take();
-      func();
+      if (func)
+      {
+        // sleep(1); // for test life time
+        func();
+      }
     }
   }
 
 private:
   int m_threadNum;
   bool m_running;
-  std::vector<std::unique_ptr<std::thread>> m_threads;
+  std::vector<std::unique_ptr<xllib::Thread>> m_threads;
   TaskQueue m_tasks;
 };
 
