@@ -4,3 +4,6 @@ core
 base/bin
 demo/bin
 test/bin
+test/a.out
+test/client
+test/server

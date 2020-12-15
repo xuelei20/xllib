@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <thread>
 #include <functional>
+#include <iostream>
 
 void *pointerArgRtn(void *arg)
 {
@@ -75,6 +76,7 @@ void testXLThread()
 {
   xllib::Thread thr1(loopNon);
   thr1.start();
+  std::cout << thr1.getName() << std::endl;
 
   Foo foo;
   xllib::Thread thr2(std::bind(&Foo::add, foo, 34, 9));
