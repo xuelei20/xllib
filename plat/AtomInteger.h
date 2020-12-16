@@ -48,7 +48,7 @@ public:
   }
 
 private:
-  T m_value;
+  volatile T m_value; // must tell compiler: get value from memory(not cache) every time.
 };
 
 typedef AtomInteger<int32_t> AtomInt32;
