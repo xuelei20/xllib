@@ -90,7 +90,7 @@ private:
   std::string m_name;
   pthread_t m_tid;
   bool m_running;
-  AtomInt32 m_num;
+  static AtomInt32 m_num;
 };
 
 void *globalThreadFunc(void *arg)
