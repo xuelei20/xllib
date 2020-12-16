@@ -3,13 +3,14 @@
 #define XLLIB_THREADPOOL_H
 
 #include "../base/noncopyable.h"
-#include "../plat/Thread.h"
+// #include "../plat/Thread.h"
 #include "../plat/xldefine.h"
 #include "TaskQueue.h"
 
 #include <vector>
 #include <memory>
 #include <iostream>
+#include <thread>
 
 #include <unistd.h>
 
@@ -19,26 +20,23 @@ namespace xllib
 class ThreadPool : noncopyable
 {
 public:
-  ThreadPool(int threadNum) :
-    m_threadNum(threadNum),
-    m_running(false)
+  static ThreadPool& instance()
   {
-  }
-  ~ThreadPool()
-  {
+    static ThreadPool inst;
+    return inst;
   }
 
-  void start()
+  void start(int threadNum)
   {
+    m_threadNum = threadNum;
     XL_ASSERT(!m_running);
 
     m_running = true;
     for (int i=0; i<m_threadNum; ++i)
     {
       // m_threads.emplace_back(new std::thread(doWork));
-      m_threads.emplace_back(new xllib::Thread(
-        std::bind(&ThreadPool::doTask, this))); // WARNING: cant' in construct pass this pointer!
-      m_threads[i]->start();
+      m_threads.emplace_back(new std::thread(
+        &ThreadPool::doTask, this)); // WARNING: cant' in construct pass this pointer!
     }
   }
 
@@ -65,6 +63,12 @@ public:
   }
 
 private:
+  ThreadPool()
+    : m_threadNum(0)
+    , m_running(false)
+  {
+  }
+
   void doTask()
   {
     while (m_running)
@@ -81,10 +85,10 @@ private:
 private:
   int m_threadNum;
   bool m_running;
-  std::vector<std::unique_ptr<xllib::Thread>> m_threads;
+  std::vector<std::unique_ptr<std::thread>> m_threads;
   TaskQueue m_tasks;
 };
 
-}
+} // namespace
 
-#endif
+#endif // XLLIB_

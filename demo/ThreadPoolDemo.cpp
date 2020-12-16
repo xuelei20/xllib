@@ -45,8 +45,8 @@ void testClassThread()
 
 void testThreadPool()
 {
-  xllib::ThreadPool threadPool(1);
-  threadPool.start();
+  xllib::ThreadPool& threadPool = xllib::ThreadPool::instance();
+  threadPool.start(2);
 
   std::function<void()> func = std::bind(add);
   threadPool.postTask(func);
@@ -59,12 +59,26 @@ void testThreadPool()
   }
 
   sleep(5); //wait do work
-  threadPool.stop();
+}
+
+void test()
+{
+  printf("hello pool\n");
+}
+
+void testThreadPool2()
+{
+  xllib::ThreadPool& pool = xllib::ThreadPool::instance();
+  xllib::TaskQueue::Task task = std::bind(test);
+  pool.postTask(task);
+  sleep(1);
+  pool.stop();
 }
 
 int main()
 {
   testThreadPool();
+  testThreadPool2();
   sleep(2);
 
   return 0;

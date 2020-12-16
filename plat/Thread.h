@@ -29,6 +29,7 @@ public:
   {
     setDefaultName();
   }
+
   ~Thread()
   {
     if (m_running)
@@ -50,7 +51,7 @@ public:
     return rtn;
   }
 
-  // don't support stop()/suspend()/destory()/cancel(), it's not normal exit.
+  // don't support stop()/suspend()/destory()/cancel(), it will unnormal exit.
 
   void runInThread()
   {
@@ -92,6 +93,8 @@ private:
   bool m_running;
   static AtomInt32 m_num;
 };
+
+AtomInt32 Thread::m_num;
 
 void *globalThreadFunc(void *arg)
 {

@@ -115,7 +115,7 @@ class Singleton
 public:
   static T* instance()
   {
-    static T data; // thread-safe?
+    static T data; // static is thread-safe in c++11
     return &data;
   }
 };

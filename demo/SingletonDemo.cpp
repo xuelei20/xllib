@@ -42,9 +42,30 @@ void singleton()
   pFac->show();
 }
 
+class SingletonC11
+{
+public:
+  static SingletonC11* instance()
+  {
+    static SingletonC11 inst;
+    return &inst;
+  }
+  void show()
+  {
+    printf("%d\n", m_n);
+  }
+private:
+  SingletonC11()
+  {}
+  int m_n;
+};
+
 int main()
 {
-  singletonOnce();
-  singleton();
+  // singletonOnce();
+  // singleton();
+  SingletonC11 *pSingle = SingletonC11::instance();
+  pSingle->show(); 
+
   return 0;
 }
