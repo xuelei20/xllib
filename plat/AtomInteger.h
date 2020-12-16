@@ -34,7 +34,7 @@ public:
 
   T addAndGet(T n)
   {
-    return getAndAdd(n) + n;
+    return __sync_add_and_fetch(&m_value, n);
   }
 
   T incrementAndGet()
