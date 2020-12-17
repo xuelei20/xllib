@@ -24,7 +24,7 @@ public:
   // comment
   void setName(const std::string& name); // param: const & obj
   // comment
-  std::string getName() const; // return: don't need &, but need const
+  std::string getName() const; // can't return & (not safe). and need const
   // comment
   void showInfo();
 
