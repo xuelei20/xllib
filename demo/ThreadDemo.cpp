@@ -23,7 +23,7 @@ void poniterArg(void *arg)
 
 void loopNon()
 {
-  while (1)
+  for (int i=0; i<20; i++)
   {
     printf("loopNon\n");
     sleep(1);
@@ -76,7 +76,7 @@ void testXLThread()
 {
   xllib::Thread thr1(loopNon);
   thr1.start();
-  std::cout << thr1.getName() << std::endl;
+  // std::cout << thr1.getName() << std::endl;
 
   Foo foo;
   xllib::Thread thr2(std::bind(&Foo::add, foo, 34, 9));

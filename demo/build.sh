@@ -8,3 +8,4 @@ g++ ThreadDemo.cpp -pthread -g -o ${binpath}/ThreadDemo
 g++ ThreadPoolDemo.cpp -pthread -g -o ${binpath}/ThreadPoolDemo
 g++ xldefineDemo.cpp -g -o ${binpath}/xldefineDemo
 g++ AtomIntegerDemo.cpp -g -o ${binpath}/AtomIntegerDemo
+g++ stringHelperDemo.cpp -g -o ${binpath}/stringHelperDemo

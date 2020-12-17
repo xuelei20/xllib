@@ -3,14 +3,12 @@
 #define XLLIB_THREADPOOL_H
 
 #include "../base/noncopyable.h"
-// #include "../plat/Thread.h"
+#include "../plat/Thread.h"
 #include "../plat/xldefine.h"
-#include "TaskQueue.h"
+#include "BlockingQueue.h"
 
 #include <vector>
 #include <memory>
-#include <iostream>
-#include <thread>
 
 #include <unistd.h>
 
@@ -20,10 +18,13 @@ namespace xllib
 class ThreadPool : noncopyable
 {
 public:
-  static ThreadPool& instance()
+  typedef std::function<void()> Task;
+
+  ThreadPool(const std::string& name = "xlThreadPool")
+    : m_name(name)
+    , m_threadNum(0)
+    , m_running(false)
   {
-    static ThreadPool inst;
-    return inst;
   }
 
   void start(int threadNum)
@@ -34,9 +35,9 @@ public:
     m_running = true;
     for (int i=0; i<m_threadNum; ++i)
     {
-      // m_threads.emplace_back(new std::thread(doWork));
-      m_threads.emplace_back(new std::thread(
-        &ThreadPool::doTask, this)); // WARNING: cant' in construct pass this pointer!
+      m_threads.emplace_back(new xllib::Thread(
+        std::bind(&ThreadPool::doTask, this))); // WARNING: cant' in construct pass this pointer!
+      m_threads[i]->start();
     }
   }
 
@@ -48,8 +49,8 @@ public:
     m_running = false;
     for (int i=0; i<m_threadNum; ++i)
     {
-      TaskQueue::Task task = std::bind([](){});
-      postTask(task);
+      Task task = std::bind([](){});
+      post(task);
     }
     for (int i=0; i<m_threadNum; ++i)
     {
@@ -57,23 +58,17 @@ public:
     }
   }
 
-  void postTask(TaskQueue::Task& func)
+  void post(Task func)
   {
     m_tasks.put(func);
   }
 
 private:
-  ThreadPool()
-    : m_threadNum(0)
-    , m_running(false)
-  {
-  }
-
   void doTask()
   {
     while (m_running)
     {
-      TaskQueue::Task func = m_tasks.take();
+      Task func = m_tasks.take();
       if (func)
       {
         // sleep(1); // for test life time
@@ -83,10 +78,11 @@ private:
   }
 
 private:
+  std::string m_name;
   int m_threadNum;
   bool m_running;
-  std::vector<std::unique_ptr<std::thread>> m_threads;
-  TaskQueue m_tasks;
+  std::vector<std::unique_ptr<xllib::Thread>> m_threads;
+  xllib::BlockingQueue<Task> m_tasks;
 };
 
 } // namespace

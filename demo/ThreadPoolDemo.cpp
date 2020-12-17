@@ -1,6 +1,5 @@
 #include "../comm/ThreadPool.h"
-
-#include <thread>
+#include "../plat/Thread.h"
 
 #include <unistd.h>
 #include <stdio.h>
@@ -36,29 +35,41 @@ private:
   int m_num;
 };
 
-void testClassThread()
-{
-  Foo foo(1);
-  std::thread thr(&Foo::print, foo);
-  thr.join();
-}
+// void testClassThread()
+// {
+  // Foo foo(1);
+  // std::thread thr(&Foo::print, foo);
+  // thr.join();
+// }
 
 void testThreadPool()
 {
-  xllib::ThreadPool& threadPool = xllib::ThreadPool::instance();
+  xllib::ThreadPool threadPool;
   threadPool.start(2);
 
   std::function<void()> func = std::bind(add);
-  threadPool.postTask(func);
-  threadPool.postTask(func);
+  threadPool.post(func);
+  threadPool.post(func);
 
   {
     Foo foo(2); // life time?
     std::function<void()> func2 = std::bind(&Foo::print, foo);
-    threadPool.postTask(func2);
+    threadPool.post(func2);
   }
 
   sleep(5); //wait do work
+  threadPool.stop();
+}
+
+void testPrimaryThreadPool()
+{
+  xllib::ThreadPool threadPool;
+  threadPool.start(1);
+
+  std::function<void()> func = std::bind(add);
+  threadPool.post(func);
+  sleep(5);
+  threadPool.stop();
 }
 
 void test()
@@ -66,19 +77,9 @@ void test()
   printf("hello pool\n");
 }
 
-void testThreadPool2()
-{
-  xllib::ThreadPool& pool = xllib::ThreadPool::instance();
-  xllib::TaskQueue::Task task = std::bind(test);
-  pool.postTask(task);
-  sleep(1);
-  pool.stop();
-}
-
 int main()
 {
   testThreadPool();
-  testThreadPool2();
   sleep(2);
 
   return 0;

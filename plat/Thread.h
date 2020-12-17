@@ -21,10 +21,10 @@ class Thread : noncopyable
 {
 public:
   typedef std::function<void()> ThreadFunc;
-  explicit Thread(ThreadFunc func, const std::string &name = "")
+  explicit Thread(ThreadFunc func, const std::string &name = std::string())
     : m_func(std::move(func))
     , m_name(name)
-    , m_tid(0)
+    , m_pthread(0)
     , m_running(false)
   {
     setDefaultName();
@@ -34,20 +34,20 @@ public:
   {
     if (m_running)
     {
-      pthread_detach(m_tid);
+      pthread_detach(m_pthread);
     }
   }
 
   void start()
   {
-    pthread_create(&m_tid, NULL, globalThreadFunc, this);
-    // printf("m_tid:%ld\n", m_tid);
+    pthread_create(&m_pthread, NULL, globalThreadFunc, this);
   }
 
   int join()
   {
-    int rtn = pthread_join(m_tid, NULL);
+    int rtn = pthread_join(m_pthread, NULL);
     m_running = false;
+    printf("thread[%s] exit.\n", m_name.c_str());
     return rtn;
   }
 
@@ -55,6 +55,8 @@ public:
 
   void runInThread()
   {
+    pid_t pid = currentThreadId();
+    printf("new thread[%s], pid:%d.\n", m_name.c_str(), pid);
     if (m_func)
     {
       m_func();
@@ -81,7 +83,7 @@ private:
     if (m_name.empty())
     {
       char name[32];
-      snprintf(name, sizeof(name)-1, "xllibThread%d", num);
+      snprintf(name, sizeof(name)-1, "xlThread%d", num);
       m_name = name;
     }
   }
@@ -89,7 +91,7 @@ private:
 private:
   ThreadFunc m_func;
   std::string m_name;
-  pthread_t m_tid;
+  pthread_t m_pthread;
   bool m_running;
   static AtomInt32 m_num;
 };
