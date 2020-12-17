@@ -22,6 +22,10 @@ public:
   // comment
   Foo(int num, std::string& name);
   // comment
+  void setName(const std::string& name); // param: const & obj
+  // comment
+  std::string getName() const; // return: don't need &, but need const
+  // comment
   void showInfo();
 
 private:
