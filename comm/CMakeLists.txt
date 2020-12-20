@@ -1,5 +1,5 @@
 set(comm_SRCS
-  BlockingQueue.cpp
+  BlockingQueue.hpp
   CountDown.cpp
   CurrentThread.cpp
   stringHelper.cpp

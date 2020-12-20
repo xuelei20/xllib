@@ -3,7 +3,7 @@
 #define XUEL_THREADPOOL_H
 
 #include "noncopyable.h"
-#include "BlockingQueue.h"
+#include "BlockingQueue.hpp"
 #include "CurrentThread.h"
 
 #include <vector>

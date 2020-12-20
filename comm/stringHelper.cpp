@@ -12,7 +12,7 @@ std::string& stringHelper::toUpper(std::string& str)
   return str;
 }
 
-std::string format(const char* fmt, ...)
+std::string stringHelper::format(const char* fmt, ...)
 {
   char buff[1024];
 
