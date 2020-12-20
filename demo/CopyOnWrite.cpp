@@ -1,4 +1,4 @@
-#include "../plat/Mutex.h"
+#include "Mutex.h"
 
 #include <vector>
 #include <memory>
@@ -35,7 +35,7 @@ void traverse()
 
 void Foo::doit()
 {
-  Foo f;
+  // Foo f;
   printf("doit\n");
   // post(f); // deadlock
 }

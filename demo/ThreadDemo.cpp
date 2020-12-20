@@ -1,4 +1,4 @@
-#include "../plat/Thread.h"
+#include "Thread.h"
 #include <unistd.h>
 #include <thread>
 #include <functional>

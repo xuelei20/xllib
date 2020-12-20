@@ -5,7 +5,7 @@
 #include <functional>
 #include <unistd.h>
 #include <assert.h>
-#include "../plat/Mutex.h"
+#include "Mutex.h"
 using namespace std;
 using namespace placeholders;
 
@@ -78,7 +78,7 @@ private:
   }
 
   map<string, weak_ptr<Stock>> m_stocks;
-  std::mutex m_mutex;
+  xllib::Mutex m_mutex;
 };
 
 void longLifeFactory()

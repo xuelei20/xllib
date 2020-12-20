@@ -1,5 +1,5 @@
 #include "../comm/ThreadPool.h"
-#include "../plat/Thread.h"
+#include "Thread.h"
 
 #include <unistd.h>
 #include <stdio.h>

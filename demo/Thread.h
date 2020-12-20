@@ -1,11 +1,12 @@
 #ifndef XLLIB_THREAD_H
 #define XLLIB_THREAD_H
 
-#include "../base/noncopyable.h"
-#include "../plat/xldefine.h"
-#include "../plat/AtomInteger.h"
+#include "../comm/noncopyable.h"
+#include "../comm/xldefine.h"
+#include "AtomInteger.h"
 
 #include <functional>
+#include <assert.h>
 
 #include <pthread.h>
 #include <unistd.h>
@@ -101,7 +102,7 @@ AtomInt32 Thread::m_num;
 void *globalThreadFunc(void *arg)
 {
   Thread *pthr = static_cast<Thread *>(arg);
-  XL_ASSERT(pthr != NULL);
+  assert(pthr != NULL);
   pthr->runInThread();
   return NULL;
 }

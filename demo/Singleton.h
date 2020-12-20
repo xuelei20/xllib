@@ -2,7 +2,7 @@
 #ifndef XLLIB_SINGLETON_H
 #define XLLIB_SINGLETON_H
 
-#include "../base/noncopyable.h"
+#include "../comm/noncopyable.h"
 #include "Mutex.h"
 
 namespace xllib

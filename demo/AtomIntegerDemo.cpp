@@ -1,4 +1,4 @@
-#include "../plat/AtomInteger.h"
+#include "AtomInteger.h"
 #include <stdio.h>
 
 int main()

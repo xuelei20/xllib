@@ -15,6 +15,6 @@ protected:
   ~noncopyable() = default;
 };
 
-}
+} // namespace
 
-#endif
+#endif // XLLIB_

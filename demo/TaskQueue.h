@@ -1,8 +1,8 @@
 #ifndef XLLIB_TASKQUEUE_H
 #define XLLIB_TASKQUEUE_H
 
-#include "../base/noncopyable.h"
-#include "BlockingQueue.h"
+#include "../comm/noncopyable.h"
+#include "../comm/BlockingQueue.h"
 
 #include <functional>
 

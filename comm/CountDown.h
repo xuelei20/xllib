@@ -2,9 +2,10 @@
 #ifndef XLLIB_COUNTDOWN_H
 #define XLLIB_COUNTDOWN_H
 
-#include "../base/noncopyable.h"
-#include "../plat/Mutex.h"
-#include "../plat/Condition.h"
+#include "noncopyable.h"
+
+#include <mutex>
+#include <condition_variable>
 
 namespace xllib
 {
@@ -12,33 +13,15 @@ namespace xllib
 class CountDown : noncopyable
 {
 public:
-  explicit CountDown(int count) 
-    : m_count(count)
-  {
-  }
+  explicit CountDown(int count);
 
-  void wait()
-  {
-    MutexGuard guard(m_mutex);
-    while (m_count > 0)
-    {
-      m_cond.wait(m_mutex); //unlock, wait for notify...lock
-    }
-  }
+  void wait();
 
-  void down()
-  {
-    MutexGuard guard(m_mutex);
-    --m_count;
-    if (0 == m_count)
-    {
-      m_cond.notifyAll();
-    }
-  }
+  void down();
 
 private:
-  Mutex m_mutex;
-  Condition m_cond;
+  std::mutex m_mutex;
+  std::condition_variable m_cond;
   int m_count;
 };
 

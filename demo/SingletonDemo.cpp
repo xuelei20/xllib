@@ -1,6 +1,6 @@
-#include "../plat/Singleton.h"
+#include "Singleton.h"
 
-#include "stdio.h"
+#include <stdio.h>
 
 class Factory
 {
