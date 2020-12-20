@@ -1,11 +1,11 @@
 // list some way
-#ifndef XLLIB_SINGLETON_H
-#define XLLIB_SINGLETON_H
+#ifndef XUEL_SINGLETON_H
+#define XUEL_SINGLETON_H
 
 #include "../comm/noncopyable.h"
 #include "Mutex.h"
 
-namespace xllib
+namespace xuel
 {
 
 // verison1: thread-unsafe. not ok

@@ -1,6 +1,6 @@
 #include "BlockingQueue.h"
 
-using namespace xllib;
+using namespace xuel;
 
 template<typename T>
 void BlockingQueue<T>::put(T& data)

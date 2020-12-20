@@ -14,18 +14,18 @@ public:
   void doit();
 };
 
-xllib::Mutex g_mutex;
+xuel::Mutex g_mutex;
 std::vector<Foo> g_foos;
 
 void post(const Foo& foo)
 {
-  xllib::MutexGuard guard(g_mutex);
+  xuel::MutexGuard guard(g_mutex);
   g_foos.push_back(foo);
 }
 
 void traverse()
 {
-  xllib::MutexGuard guard(g_mutex);
+  xuel::MutexGuard guard(g_mutex);
   std::vector<Foo>::iterator it;
   for (it = g_foos.begin(); it != g_foos.end(); ++it)
   {
@@ -54,7 +54,7 @@ FooListPtr g_shareFoos;
 void post_cow(const Foo& foo)
 {
   printf("post_cow\n");
-  xllib::MutexGuard guard(g_mutex);
+  xuel::MutexGuard guard(g_mutex);
   if (!g_shareFoos.unique()) // write, when there's other is reading
   {
     // copy-on-write(copy-on-other-reading exactly)
@@ -69,7 +69,7 @@ void traverse_cow()
   printf("traverse_cow\n");
   FooListPtr foos;
   {
-    xllib::MutexGuard guard(g_mutex);
+    xuel::MutexGuard guard(g_mutex);
     foos = g_shareFoos; // when reading, reference count +1
   }
   std::vector<Foo>::iterator it;

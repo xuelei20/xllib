@@ -1,7 +1,7 @@
-#ifndef XLLIB_NONCOPYABLE_H
-#define XLLIB_NONCOPYABLE_H
+#ifndef XUEL_NONCOPYABLE_H
+#define XUEL_NONCOPYABLE_H
 
-namespace xllib
+namespace xuel
 {
   
 class noncopyable
@@ -17,4 +17,4 @@ protected:
 
 } // namespace
 
-#endif // XLLIB_
+#endif // XUEL_

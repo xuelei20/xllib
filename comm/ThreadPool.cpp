@@ -2,7 +2,7 @@
 
 #include <assert.h>
 
-using namespace xllib;
+using namespace xuel;
 
 ThreadPool::ThreadPool(const std::string& name)
   : m_name(name)
@@ -48,7 +48,7 @@ void ThreadPool::post(Task func)
 
 void ThreadPool::doTask()
 {
-  printf("new thread(pid:%d)\n", xllib::CurrentThread::getpid());
+  printf("new thread(pid:%d)\n", xuel::CurrentThread::getpid());
   while (m_running)
   {
     Task func = m_tasks.take();

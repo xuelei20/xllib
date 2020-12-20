@@ -1,11 +1,11 @@
-#ifndef XLLIB_CURRENTTHREAD_H
-#define XLLIB_CURRENTTHREAD_H
+#ifndef XUEL_CURRENTTHREAD_H
+#define XUEL_CURRENTTHREAD_H
 
 #include "noncopyable.h"
 
 #include <unistd.h>
 
-namespace xllib
+namespace xuel
 {
 
 class CurrentThread : noncopyable
@@ -18,4 +18,4 @@ public:
 
 } // namespace
 
-#endif // XLLIB_
+#endif // XUEL_

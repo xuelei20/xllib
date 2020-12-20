@@ -1,6 +1,6 @@
 #include "CountDown.h"
 
-using namespace xllib;
+using namespace xuel;
 
 CountDown::CountDown(int count) 
   : m_count(count)

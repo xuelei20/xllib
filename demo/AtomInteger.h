@@ -1,11 +1,11 @@
-#ifndef XLLIB_ATOMINTEGER_H
-#define XLLIB_ATOMINTEGER_H
+#ifndef XUEL_ATOMINTEGER_H
+#define XUEL_ATOMINTEGER_H
 
 #include "../comm/noncopyable.h"
 
 #include <stdint.h>
 
-namespace xllib
+namespace xuel
 {
 
 template<typename T>

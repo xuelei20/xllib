@@ -1,5 +1,5 @@
-#ifndef XLLIB_THREAD_H
-#define XLLIB_THREAD_H
+#ifndef XUEL_THREAD_H
+#define XUEL_THREAD_H
 
 #include "../comm/noncopyable.h"
 #include "../comm/xldefine.h"
@@ -13,7 +13,7 @@
 #include <syscall.h>
 #include <string.h>
 
-namespace xllib
+namespace xuel
 {
 
 void *globalThreadFunc(void *arg);

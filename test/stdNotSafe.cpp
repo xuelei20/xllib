@@ -16,7 +16,7 @@ public:
   {
     for (int i=0; i<loopnum; i++)
     {
-//      xllib::MutexLockGuard guard(m_mutex);
+//      xuel::MutexLockGuard guard(m_mutex);
       str += "hellosafe ";
     }
   }
@@ -25,7 +25,7 @@ public:
   {
     for (int i=0; i<loopnum; i++)
     {
-//      xllib::MutexLockGuard guard(m_mutex);
+//      xuel::MutexLockGuard guard(m_mutex);
       str += "nihao ";
     }
   }
@@ -91,7 +91,7 @@ void readSharedPtr()
 {
   shared_ptr<A> localPtr;
   { //less lock range
-    xllib::MutexLockGuard guard(g_mutex);
+    xuel::MutexLockGuard guard(g_mutex);
     localPtr = g_ptr; //read global ptr
   }
   doit(localPtr); //use local, don't need lock(to shared_ptr, not A obj)
@@ -102,7 +102,7 @@ void writeSharedPtr()
   shared_ptr<A> newpa(new A("localnew"));
   shared_ptr<A> saveptr(g_ptr);
   { //less lock range
-    xllib::MutexLockGuard guard(g_mutex);
+    xuel::MutexLockGuard guard(g_mutex);
     g_ptr = newpa; //write to global ptr
     cout << "lock range\n";
   }

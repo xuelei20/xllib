@@ -7,7 +7,7 @@
 
 #include <unistd.h>
 
-xllib::BlockingQueue<std::string> g_blockqueue;
+xuel::BlockingQueue<std::string> g_blockqueue;
 
 void Producer()
 {

@@ -38,7 +38,7 @@ public:
   shared_ptr<Stock> getStock(const string &key)
   {
     shared_ptr<Stock> sharedStock;
-    xllib::MutexGuard guard(m_mutex);
+    xuel::MutexGuard guard(m_mutex);
     sharedStock = m_stocks[key].lock();
     if (!sharedStock)
     {
@@ -64,7 +64,7 @@ private:
   {
     cout << "deleteCallback" << endl;
     //if (factory) 
-    xllib::MutexGuard guard(m_mutex);
+    xuel::MutexGuard guard(m_mutex);
     if (pStock)
     {
       auto it = m_stocks.find(pStock->key());
@@ -78,7 +78,7 @@ private:
   }
 
   map<string, weak_ptr<Stock>> m_stocks;
-  xllib::Mutex m_mutex;
+  xuel::Mutex m_mutex;
 };
 
 void longLifeFactory()

@@ -44,7 +44,7 @@ private:
 
 void testThreadPool()
 {
-  xllib::ThreadPool threadPool;
+  xuel::ThreadPool threadPool;
   threadPool.start(2);
 
   std::function<void()> func = std::bind(add);
@@ -63,7 +63,7 @@ void testThreadPool()
 
 void testPrimaryThreadPool()
 {
-  xllib::ThreadPool threadPool;
+  xuel::ThreadPool threadPool;
   threadPool.start(1);
 
   std::function<void()> func = std::bind(add);

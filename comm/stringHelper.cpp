@@ -1,6 +1,6 @@
 #include "stringHelper.h"
 
-using namespace xllib;
+using namespace xuel;
 
 std::string& stringHelper::toUpper(std::string& str)
 {

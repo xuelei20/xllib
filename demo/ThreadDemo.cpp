@@ -74,12 +74,12 @@ void testStdThread()
 
 void testXLThread()
 {
-  xllib::Thread thr1(loopNon);
+  xuel::Thread thr1(loopNon);
   thr1.start();
   // std::cout << thr1.getName() << std::endl;
 
   Foo foo;
-  xllib::Thread thr2(std::bind(&Foo::add, foo, 34, 9));
+  xuel::Thread thr2(std::bind(&Foo::add, foo, 34, 9));
   thr2.start();
 
   thr1.join();

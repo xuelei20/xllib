@@ -1,6 +1,6 @@
 // not completed
-#ifndef XLLIB_THREADPOOL_H
-#define XLLIB_THREADPOOL_H
+#ifndef XUEL_THREADPOOL_H
+#define XUEL_THREADPOOL_H
 
 #include "noncopyable.h"
 #include "BlockingQueue.h"
@@ -12,7 +12,7 @@
 #include <functional>
 // #include <atomic>
 
-namespace xllib
+namespace xuel
 {
 
 class ThreadPool : noncopyable
@@ -35,9 +35,9 @@ private:
   int m_threadNum;
   bool m_running;
   std::vector<std::unique_ptr<std::thread>> m_threads;
-  xllib::BlockingQueue<Task> m_tasks;
+  xuel::BlockingQueue<Task> m_tasks;
 };
 
 } // namespace
 
-#endif // XLLIB_
+#endif // XUEL_

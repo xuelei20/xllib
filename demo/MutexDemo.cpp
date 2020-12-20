@@ -4,12 +4,12 @@
 
 #include <unistd.h>
 
-xllib::Mutex g_mutex;
+xuel::Mutex g_mutex;
 int g_num = 0;
 
 void add()
 {
-  xllib::MutexGuard guard(g_mutex); 
+  xuel::MutexGuard guard(g_mutex); 
   for (int i=0; i<5; i++)
   {
     g_num = i;
@@ -21,7 +21,7 @@ void add()
 void show()
 {
   sleep(1);
-  xllib::MutexGuard guard(g_mutex);
+  xuel::MutexGuard guard(g_mutex);
   printf("del, g_num = %d\n", g_num);
 }
 

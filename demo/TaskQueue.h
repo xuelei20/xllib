@@ -1,12 +1,12 @@
-#ifndef XLLIB_TASKQUEUE_H
-#define XLLIB_TASKQUEUE_H
+#ifndef XUEL_TASKQUEUE_H
+#define XUEL_TASKQUEUE_H
 
 #include "../comm/noncopyable.h"
 #include "../comm/BlockingQueue.h"
 
 #include <functional>
 
-namespace xllib
+namespace xuel
 {
 
 class TaskQueue : noncopyable

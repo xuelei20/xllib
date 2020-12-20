@@ -1,13 +1,13 @@
 // thread-safe
-#ifndef XLLIB_COUNTDOWN_H
-#define XLLIB_COUNTDOWN_H
+#ifndef XUEL_COUNTDOWN_H
+#define XUEL_COUNTDOWN_H
 
 #include "noncopyable.h"
 
 #include <mutex>
 #include <condition_variable>
 
-namespace xllib
+namespace xuel
 {
 
 class CountDown : noncopyable

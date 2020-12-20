@@ -2,7 +2,7 @@
 
 #include <syscall.h>
 
-using namespace xllib;
+using namespace xuel;
 
 pid_t CurrentThread::getpid()
 {

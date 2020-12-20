@@ -5,9 +5,9 @@
 int main()
 {
   std::string str1("hello");
-  xllib::stringHelper::toUpper(str1).append("add");
+  xuel::stringHelper::toUpper(str1).append("add");
   std::cout << str1 << std::endl;
 
-  std::string strformat = xllib::stringHelper::format("format%d, %s", 23, "this");
+  std::string strformat = xuel::stringHelper::format("format%d, %s", 23, "this");
   std::cout << strformat << std::endl;
 }

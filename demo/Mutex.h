@@ -1,13 +1,13 @@
 // use linux api
-#ifndef XLLIB_MUTEX_H
-#define XLLIB_MUTEX_H
+#ifndef XUEL_MUTEX_H
+#define XUEL_MUTEX_H
 
 #include "../comm/noncopyable.h"
 
 #include <pthread.h>
 #include <assert.h>
 
-namespace xllib
+namespace xuel
 {
 
 class Mutex : noncopyable

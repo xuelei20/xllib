@@ -4,7 +4,7 @@
 
 #include <unistd.h>
 
-xllib::CountDown g_cdown(10);
+xuel::CountDown g_cdown(10);
 
 void doLongWork()
 {

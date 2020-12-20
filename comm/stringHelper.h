@@ -1,12 +1,12 @@
-#ifndef XLLIB_STRING_H
-#define XLLIB_STRING_H
+#ifndef XUEL_STRING_H
+#define XUEL_STRING_H
 
 #include "noncopyable.h"
 
 #include <string>
 #include <stdarg.h>
 
-namespace xllib
+namespace xuel
 {
 
 class stringHelper : noncopyable
@@ -19,4 +19,4 @@ public:
 };
 
 } // namespace
-#endif // XLLIB_
+#endif // XUEL_

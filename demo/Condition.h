@@ -1,11 +1,11 @@
 // use linux api
-#ifndef XLLIB_CONDITION_H
-#define XLLIB_CONDITION_H
+#ifndef XUEL_CONDITION_H
+#define XUEL_CONDITION_H
 
 #include "../comm/noncopyable.h"
 #include "Mutex.h"
 
-namespace xllib
+namespace xuel
 {
 
 class Condition : noncopyable

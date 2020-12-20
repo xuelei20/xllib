@@ -1,6 +1,6 @@
 // thread-safe
-#ifndef XLLIB_BLOCKINGQUEUE_H
-#define XLLIB_BLOCKINGQUEUE_H
+#ifndef XUEL_BLOCKINGQUEUE_H
+#define XUEL_BLOCKINGQUEUE_H
 
 #include "noncopyable.h"
 
@@ -8,7 +8,7 @@
 #include <condition_variable>
 #include <queue>
 
-namespace xllib
+namespace xuel
 {
 
 template<typename T>
@@ -25,4 +25,4 @@ private:
 };
 
 } // namespace
-#endif // XLLIB_
+#endif // XUEL_
