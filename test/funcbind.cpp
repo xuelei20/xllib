@@ -1,5 +1,7 @@
 #include <functional>
 #include <iostream>
+#include <thread>
+#include <unistd.h>
 using namespace std;
 using namespace placeholders;
 
@@ -39,7 +41,7 @@ private:
   int m_a;
 };
 
-int main()
+int test()
 {
   std::function<int(int,int,int)> funadd = add;
   funadd(1,2,3);
@@ -65,5 +67,66 @@ int main()
   function<double(int,double)> func3 = bind(&A::funA, &obja, _1, _2); //obj addr is first param
   func3(10, 22.2);
 
+  return 0;
+}
+
+class Foo
+{
+public:
+  void add(int n)
+  {
+    a = n;
+    while (1)
+    {
+      cout << "add" << endl;
+      sleep(1);
+    }
+  }
+  void sub()
+  {
+    while (1)
+    {
+      cout << "sub" << endl;
+      cout << a;
+      sleep(1);
+    }
+  }
+  int a;
+};
+
+typedef std::function<void()> MsgFun;
+MsgFun m_msgFun;
+
+void msgLoop()
+{
+  while (true)
+  {
+    m_msgFun();
+    cout << "func" << endl;
+    sleep(1);
+  }
+}
+
+void setMsgFun(MsgFun func)
+{
+  m_msgFun = func;
+}
+
+
+int test2()
+{
+  // Foo foo;
+  // std::function<void()> funloop = std::bind(&Foo::add, &foo, 20);
+  Foo *pfoo = new Foo;
+  setMsgFun(std::bind(&Foo::sub, pfoo));
+  std::thread thr(msgLoop);
+  sleep(3); // pfoo is release, core dump
+  return 0;
+}
+
+int main()
+{
+  test2();
+  sleep(100);
   return 0;
 }

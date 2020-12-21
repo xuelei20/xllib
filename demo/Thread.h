@@ -48,7 +48,7 @@ public:
   {
     int rtn = pthread_join(m_pthread, NULL);
     m_running = false;
-    printf("thread[%s] exit.\n", m_name.c_str());
+    printf("thread'%s' exit.\n", m_name.c_str());
     return rtn;
   }
 
@@ -57,7 +57,7 @@ public:
   void runInThread()
   {
     pid_t pid = currentThreadId();
-    printf("new thread[%s], pid:%d.\n", m_name.c_str(), pid);
+    printf("new thread'%s', pid:%d.\n", m_name.c_str(), pid);
     if (m_func)
     {
       m_func();

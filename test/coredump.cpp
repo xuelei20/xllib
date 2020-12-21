@@ -3,6 +3,8 @@
 // 1.gdb a.out core
 // 2.r
 // 3.bt
+#include <vector>
+#include <string>
 #include <stdio.h>
 
 class Foo
@@ -22,20 +24,19 @@ private:
 
 void testNull(void *ptr)
 {
+  std::vector<std::string> veclog;
+  veclog.push_back("hello log1");
+  veclog.push_back("this is log2");
   int a = 0;
-  int b = a + 4;
   Foo *pobj = (Foo *)ptr;
   pobj->print(); // ok
   pobj->printMember(); // core dump
-  int c = b - 3;
   printf("testNull\n");
 }
 
 int main()
 {
-  char a = 'a';
   Foo *foo = NULL;
   testNull(foo);
-  char b = 'b';
   return 0;
 }
