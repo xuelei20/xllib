@@ -2,6 +2,7 @@ set(comm_SRCS
   BlockingQueue.hpp
   CountDown.cpp
   CurrentThread.cpp
+  File.cpp
   stringHelper.cpp
   ThreadPool.cpp
   )
