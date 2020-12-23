@@ -4,13 +4,17 @@
 
 using namespace xuel;
 
-AppendFile::AppendFile(const char* fileName)
-  : m_file(nullptr)
+File::File(const char* fileName, const char* mode)
+  : m_file(NULL)
 {
-  m_file = fopen(fileName, "a");
+  m_file = fopen(fileName, mode);
+  if (NULL == m_file)
+  {
+    fprintf(stderr, "File::File fopen failed\n");
+  }
 }
 
-AppendFile::~AppendFile()
+File::~File()
 {
   if (nullptr != m_file)
   {
@@ -18,7 +22,7 @@ AppendFile::~AppendFile()
   }
 }
 
-void AppendFile::append(const char* data, size_t size)
+void File::append(const char* data, size_t size)
 {
   size_t hasWrite = 0;
   while (hasWrite < size)
@@ -32,13 +36,14 @@ void AppendFile::append(const char* data, size_t size)
         char errstr[512];
         strerror_r(errno, errstr, sizeof(errstr));
         fprintf(stderr, "AppendFile::append fwrite failed: %s\n", errstr);
+        break;
       }
     }
     hasWrite += curWrite;
   }
 }
 
-void AppendFile::flush()
+void File::flush()
 {
   fflush(m_file);
 }

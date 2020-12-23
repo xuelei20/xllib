@@ -9,11 +9,11 @@ namespace xuel
 {
 
 // not thread-safe
-class AppendFile : noncopyable
+class File : noncopyable
 {
 public:
-  AppendFile(const char* fileName);
-  ~AppendFile();
+  File(const char* fileName, const char* mode = "a");
+  ~File();
 
   void append(const char* data, size_t size);
 
