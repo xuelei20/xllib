@@ -1,8 +1,8 @@
 ```
 ######### 我的代码风格
 ///////// Foo.h
-#ifndef XLLIB_FOO_H
-#define XLLIB_FOO_H
+#ifndef XUEL_FOO_H
+#define XUEL_FOO_H
 
 #include "myheader.h"
 
@@ -13,7 +13,7 @@
 
 #include "third.h"
 
-namespace xllib
+namespace xuel
 {
 
 class Foo : noncopyable
@@ -35,11 +35,13 @@ private:
 };
 
 } // namespace
-#endif // XLLIB_
+#endif // XUEL_
 
 ///////// Foo.cpp
 #include "Foo.h"
 #include "other.h"
+
+using namespace xuel;
 
 Foo::Foo(int num, std::string& name)
   : m_num(num)
@@ -56,10 +58,10 @@ void Foo::showInfo()
 ModernC++
 |        不用        |                        替代者                         |
 | :---------------: | :--------------------------------------------------: |
-|   char buff[32]   |                     std::string                      |
+|   char buff[32]   |           std::string（速度太慢 不频繁可以用）         |
 |       new[]       |                     std::vector                      |
 |   原始指针 Foo*    | 引用& 或 智能指针std::shared_ptr/scoped_ptr/unique_ptr |
 |        继承        |                       数据成员                        |
-| 多态/虚函数 或 回调 |               std::function、std::bind               |
+|     虚函数(回调)   |               std::function、std::bind                |
 |        异常        |                      返回值和log                      |
 |    手动资源管理     |                         RAII                         |
