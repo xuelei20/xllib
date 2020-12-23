@@ -56,7 +56,7 @@ void Foo::showInfo()
 ModernC++
 |        不用        |                        替代者                         |
 | :---------------: | :--------------------------------------------------: |
-|   char buff[32]   |                     std::string                      |
+|   char buff[32]   |           std::string（速度太慢 不频繁可以用）         |
 |       new[]       |                     std::vector                      |
 |   原始指针 Foo*    | 引用& 或 智能指针std::shared_ptr/scoped_ptr/unique_ptr |
 |        继承        |                       数据成员                        |
