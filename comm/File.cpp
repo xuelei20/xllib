@@ -27,7 +27,7 @@ void File::append(const char* data, size_t size)
   size_t hasWrite = 0;
   while (hasWrite < size)
   {
-    size_t curWrite = fwrite(data + hasWrite, size, 1, m_file);
+    size_t curWrite = fwrite(data + hasWrite, 1, size - hasWrite, m_file);
     if (0 == curWrite)
     {
       int errno = ferror(m_file);

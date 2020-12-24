@@ -7,9 +7,15 @@ LogStream::LogStream()
 
 }
 
-LogStream& LogStream::operator<<(int v)
+LogStream& LogStream::operator<<(int data)
 {
   //TODO
+  return *this;
+}
+
+LogStream& LogStream::operator<<(const char* data)
+{
+  m_buffer.copy(data, strlen(data));
   return *this;
 }
 

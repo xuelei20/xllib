@@ -32,6 +32,8 @@ private:
   LogStream m_stream;
 };
 
+#define LOGTRACE xuel::Logger(xuel::Logger::TRACE, __FILE__, __LINE__, __FUNCTION__).stream();
+
 } // namespace
 
 #endif // XUEL_
