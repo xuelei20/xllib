@@ -43,9 +43,9 @@ private:
 
 using namespace xuel;
 
-Foo::Foo(int num, std::string& name)
-  : m_num(num)
-  , m_name(name)
+Foo::Foo(int num, std::string& name) :
+  m_num(num),
+  m_name(name)
 {
 }
 
