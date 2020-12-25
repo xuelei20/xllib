@@ -15,7 +15,7 @@ LogStream& LogStream::operator<<(int data)
 
 LogStream& LogStream::operator<<(const char* data)
 {
-  m_buffer.copy(data, strlen(data));
+  m_buffer.append(data, strlen(data));
   return *this;
 }
 
@@ -24,3 +24,4 @@ void LogStream::formatInteger(T v)
 {
 
 }
+

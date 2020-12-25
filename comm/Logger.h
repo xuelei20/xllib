@@ -21,8 +21,11 @@ public:
   };
 
   Logger(LogLevel level, const char* sourceFile, int line, const char* func);
+  ~Logger();
 
-  LogStream& stream();
+  LogStream& stream() { return m_stream; }
+
+  void writeToStdout(const char* data, size_t len);
 
 private:
   LogLevel m_level;
@@ -32,7 +35,8 @@ private:
   LogStream m_stream;
 };
 
-#define LOGTRACE xuel::Logger(xuel::Logger::TRACE, __FILE__, __LINE__, __FUNCTION__).stream();
+#define LOGTRACE xuel::Logger(xuel::Logger::LogLevel::TRACE, __FILE__, __LINE__, __FUNCTION__).stream();
+#define LOGDEBUG xuel::Logger(xuel::Logger::LogLevel::DEBUG, __FILE__, __LINE__, __FUNCTION__).stream();
 
 } // namespace
 

@@ -4,8 +4,7 @@ using namespace xuel;
 
 int main()
 {
-  Logger logger(Logger::LogLevel::INFO, __FILE__, __LINE__, __FUNCTION__);
-  LogStream& stream = logger.stream();
+  LOGDEBUG << "hello std";
 
   return 0;
 }

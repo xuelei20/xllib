@@ -20,13 +20,13 @@ public:
   {
   }
 
-  // if larger than max size, will ignore
-  void copy(const char* data, size_t size)
+  // if more than max size, will be ignored
+  void append(const char* data, size_t len)
   {
-    if (SIZE - m_cur > size)
+    if (SIZE - m_cur > len)
     {
-      memcpy(m_buff + m_cur, data, size);
-      m_cur += size;
+      memcpy(m_buff + m_cur, data, len);
+      m_cur += len;
     }
   }
 
@@ -34,6 +34,9 @@ public:
   {
     m_cur = 0;
   }
+
+  int len() const { return m_cur; }
+  const char* data() const { return m_buff; }
 
 private:
   char m_buff[SIZE];
@@ -43,16 +46,21 @@ private:
 class LogStream : noncopyable
 {
 public:
+  typedef FixBuffer<kSmallBuffSize> SmallBuffer;
+
   LogStream();
 
-  LogStream& operator<<(int);
-  LogStream& operator<<(const char*);
+  LogStream& operator<<(int data);
+  LogStream& operator<<(const char* data);
+
+  const SmallBuffer& getBuffer() { return m_buffer; }
 
 private:
+
   template<typename T>
   void formatInteger(T v);
 
-  FixBuffer<kSmallBuffSize> m_buffer;
+  SmallBuffer m_buffer;
 };
 
 } // namespace
