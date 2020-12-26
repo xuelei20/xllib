@@ -21,6 +21,7 @@ public:
 
 private:
   FILE* m_file;
+  char m_buff[1024*64];
 };
 
 } // namespace

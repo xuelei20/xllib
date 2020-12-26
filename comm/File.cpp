@@ -12,6 +12,7 @@ File::File(const char* fileName, const char* mode)
   {
     fprintf(stderr, "File::File fopen failed\n");
   }
+  setbuffer(m_file, m_buff, sizeof(m_buff));
 }
 
 File::~File()

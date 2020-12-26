@@ -3,6 +3,7 @@
 
 #include "noncopyable.h"
 
+#include <string>
 #include <string.h>
 
 namespace xuel
@@ -30,13 +31,10 @@ public:
     }
   }
 
-  void reset()
-  {
-    m_cur = 0;
-  }
-
+  void reset() { m_cur = 0; }
   int len() const { return m_cur; }
   const char* data() const { return m_buff; }
+  int avail() const { return sizeof(m_buff) - m_cur; }
 
 private:
   char m_buff[SIZE];
@@ -48,19 +46,34 @@ class LogStream : noncopyable
 public:
   typedef FixBuffer<kSmallBuffSize> SmallBuffer;
 
-  LogStream();
-
+  LogStream& operator<<(short data);
+  LogStream& operator<<(unsigned short data);
   LogStream& operator<<(int data);
+  LogStream& operator<<(unsigned int data);
+  LogStream& operator<<(long data);
+  LogStream& operator<<(unsigned long data);
+  LogStream& operator<<(long long data);
+  LogStream& operator<<(unsigned long long data);
+
+  LogStream& operator<<(float data);
+  LogStream& operator<<(double data);
+
   LogStream& operator<<(const char* data);
+  LogStream& operator<<(const unsigned char* data); 
+  LogStream& operator<<(const std::string& data);
+
+  LogStream& operator<<(char data); 
+  LogStream& operator<<(bool data); 
 
   const SmallBuffer& getBuffer() { return m_buffer; }
 
 private:
-
   template<typename T>
   void formatInteger(T v);
 
   SmallBuffer m_buffer;
+
+  static const int kMaxNumberSize = 32;
 };
 
 } // namespace

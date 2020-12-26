@@ -4,9 +4,14 @@
 
 using namespace xuel;
 
-Logger::Logger(LogLevel level, const char* sourceFile, int line, const char* func) :
+namespace xuel
+{
+LogLevel g_logLevel = LogLevel::INFO;
+}
+
+Logger::Logger(LogLevel level, const char* srcFile, int line, const char* func) :
   m_level(level),
-  m_sourceFile(sourceFile),
+  m_srcFile(srcFile),
   m_line(line),
   m_func(func)
 {
@@ -22,4 +27,5 @@ void Logger::writeToStdout(const char* data, size_t len)
 {
   size_t n = fwrite(data, 1, len, stdout);
   //FIXME check n
+  fwrite("\n", 1, 1, stdout);
 }
