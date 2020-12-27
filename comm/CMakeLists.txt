@@ -3,8 +3,10 @@ set(comm_SRCS
   CountDown.cpp
   CurrentThread.cpp
   File.cpp
+  LogFile.cpp
   Logger.cpp
   LogStream.cpp
+  ProcessInfo.cpp
   stringHelper.cpp
   ThreadPool.cpp
   Timestamp.cpp

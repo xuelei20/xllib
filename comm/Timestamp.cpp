@@ -24,7 +24,7 @@ std::string Timestamp::format(bool showMicro)
   localtime_r(&tv.tv_sec, &cur);
 
   char buff[64] = {0};
-  snprintf(buff, sizeof(buff), "%04d%02d%02d-%02d:%02d:%02d", 
+  snprintf(buff, sizeof(buff), "%4d%02d%02d-%02d:%02d:%02d", 
     cur.tm_year+1900, cur.tm_mon+1, cur.tm_mday,
     cur.tm_hour, cur.tm_min, cur.tm_sec);
   if (showMicro)
@@ -35,4 +35,15 @@ std::string Timestamp::format(bool showMicro)
   }
 
   return buff;
+}
+
+void Timestamp::userFormat(char *buff, int len, const char* fmt)
+{
+  time_t tt;
+  time(&tt); // date and time(no microsecond)
+
+  struct tm cur;
+  localtime_r(&tt, &cur);
+
+  strftime(buff, len, fmt, &cur);
 }

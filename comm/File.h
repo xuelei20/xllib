@@ -16,11 +16,10 @@ public:
   ~File();
 
   void append(const char* data, size_t size);
-
   void flush();
 
 private:
-  FILE* m_file;
+  FILE* m_fp;
   char m_buff[1024*64];
 };
 

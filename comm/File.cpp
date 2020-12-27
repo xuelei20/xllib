@@ -5,21 +5,21 @@
 using namespace xuel;
 
 File::File(const char* fileName, const char* mode)
-  : m_file(nullptr)
+  : m_fp(nullptr)
 {
-  m_file = fopen(fileName, mode);
-  if (nullptr == m_file)
+  m_fp = fopen(fileName, mode);
+  if (nullptr == m_fp)
   {
     fprintf(stderr, "File::File fopen failed\n");
   }
-  setbuffer(m_file, m_buff, sizeof(m_buff));
+  setbuffer(m_fp, m_buff, sizeof(m_buff));
 }
 
 File::~File()
 {
-  if (nullptr != m_file)
+  if (nullptr != m_fp)
   {
-    fclose(m_file);
+    fclose(m_fp);
   }
 }
 
@@ -28,10 +28,10 @@ void File::append(const char* data, size_t size)
   size_t hasWrite = 0;
   while (hasWrite < size)
   {
-    size_t curWrite = fwrite(data + hasWrite, 1, size - hasWrite, m_file);
+    size_t curWrite = fwrite(data + hasWrite, 1, size - hasWrite, m_fp);
     if (0 == curWrite)
     {
-      int errno = ferror(m_file);
+      int errno = ferror(m_fp);
       if (errno)
       {
         char errstr[512];
@@ -46,5 +46,5 @@ void File::append(const char* data, size_t size)
 
 void File::flush()
 {
-  fflush(m_file);
+  fflush(m_fp);
 }

@@ -1,6 +1,12 @@
 #include "../comm/Logger.h"
+#include <thread>
 
 using namespace xuel;
+
+void proc()
+{
+  LOGDEBUG << "new thread" << 1;
+}
 
 int main()
 {
@@ -20,6 +26,9 @@ int main()
   // LOGWARN << nullptr; // not support
   
   LOGINFO << "format:" << Fmt("%.2f", 3.1415) << " ok";
+
+  std::thread thr1(proc);
+  thr1.join();
 
   return 0;
 }
