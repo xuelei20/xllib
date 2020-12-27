@@ -54,7 +54,7 @@ void testNullClass()
 
 void testNullPoint()
 {
-	B *p = NULL; //0地址
+	B *p = NULL; //in c++ NULL=0地址, in c NULL=(void*)0
 	p->printA(); //B::printA(NULL);
 	p->printB(); //B::printB(NULL);	段错误
 	p->printC(); //B::printC(NULL);	段错误

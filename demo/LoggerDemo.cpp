@@ -4,7 +4,7 @@ using namespace xuel;
 
 int main()
 {
-  // Logger::setGlobalLevel(LogLevel::WARN);
+  Logger::setLogLevel(LogLevel::TRACE);
   LOGTRACE << "hello trace";
   LOGDEBUG << "hello debug";
   unsigned char data[] = "nihao";
@@ -13,6 +13,13 @@ int main()
   LOGERROR << "hello error," << 1.234 << "," << 6.90;
   LOGFAIL << "hello fail," << 'c' << "," << true << false;
   LOGSYSERR << "hello syserr," << std::string("string");
+
+  LOGWARN << 0;
+  LOGWARN << (void*)0;
+  // LOGWARN << NULL; // warning
+  // LOGWARN << nullptr; // not support
+  
+  LOGINFO << "format:" << Fmt("%.2f", 3.1415) << " ok";
 
   return 0;
 }

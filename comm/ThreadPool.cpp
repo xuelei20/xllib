@@ -1,6 +1,5 @@
 #include "ThreadPool.h"
-
-#include <assert.h>
+#include "xldefine.h"
 
 using namespace xuel;
 
@@ -14,7 +13,7 @@ ThreadPool::ThreadPool(const std::string& name)
 void ThreadPool::start(int threadNum)
 {
   m_threadNum = threadNum;
-  assert(!m_running);
+  XL_ASSERT(!m_running);
 
   m_running = true;
   for (int i=0; i<m_threadNum; ++i)

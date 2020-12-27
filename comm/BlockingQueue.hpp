@@ -3,11 +3,11 @@
 #define XUEL_BLOCKINGQUEUE_HPP
 
 #include "noncopyable.h"
+#include "xldefine.h"
 
 #include <mutex>
 #include <condition_variable>
 #include <queue>
-#include <assert.h>
 
 namespace xuel
 {
@@ -30,7 +30,7 @@ public:
     {
       m_cond.wait(lock); // auto unlock, and if return auto lock
     }
-    assert(!m_datas.empty());
+    XL_ASSERT(!m_datas.empty());
     T data(std::move(m_datas.front())); // after move, the obj data is empty. 
     m_datas.pop(); // I will not use the obj data.
     return data;

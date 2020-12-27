@@ -5,10 +5,10 @@
 using namespace xuel;
 
 File::File(const char* fileName, const char* mode)
-  : m_file(NULL)
+  : m_file(nullptr)
 {
   m_file = fopen(fileName, mode);
-  if (NULL == m_file)
+  if (nullptr == m_file)
   {
     fprintf(stderr, "File::File fopen failed\n");
   }

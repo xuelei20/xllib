@@ -33,7 +33,10 @@ public:
   static void setLogLevel(LogLevel gLevel) { g_logLevel = gLevel; }
 
 private:
+  void levelToStr();
+
   LogLevel m_level;
+  char m_levelStr[8];
   const char* m_srcFile;
   int m_line;
   const char* m_func;

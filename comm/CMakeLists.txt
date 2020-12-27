@@ -7,6 +7,7 @@ set(comm_SRCS
   LogStream.cpp
   stringHelper.cpp
   ThreadPool.cpp
+  Timestamp.cpp
   )
 
 add_library(xuel_comm ${comm_SRCS})

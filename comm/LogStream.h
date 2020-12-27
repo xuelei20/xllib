@@ -2,6 +2,7 @@
 #define XUEL_LOGSTREAM_H
 
 #include "noncopyable.h"
+#include "xldefine.h"
 
 #include <string>
 #include <string.h>
@@ -32,8 +33,8 @@ public:
   }
 
   void reset() { m_cur = 0; }
-  int len() const { return m_cur; }
-  const char* data() const { return m_buff; }
+  int length() const { return m_cur; }
+  const char* buff() const { return m_buff; }
   int avail() const { return sizeof(m_buff) - m_cur; }
 
 private:
@@ -75,6 +76,25 @@ private:
 
   static const int kMaxNumberSize = 32;
 };
+
+class Fmt : noncopyable
+{
+public:
+  template<typename T>
+  Fmt(const char* fmt, T num);
+
+  const char* buff() const { return m_buff; }
+  int length() const { return m_length; } 
+
+private:
+  char m_buff[32];
+  int m_length;
+};
+
+inline LogStream& operator<<(LogStream& stream, const Fmt& fmt)
+{
+  return stream << fmt.buff();
+}
 
 } // namespace
 

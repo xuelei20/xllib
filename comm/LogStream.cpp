@@ -90,6 +90,7 @@ LogStream& LogStream::operator<<(float data)
   return *this;
 }
 
+// FIXME: replace this with Grisu3 by Florian Loitsch.
 LogStream& LogStream::operator<<(double data)
 {
   if (m_buffer.avail() > kMaxNumberSize)
@@ -103,13 +104,13 @@ LogStream& LogStream::operator<<(double data)
 
 LogStream& LogStream::operator<<(const char* data)
 {
-  if (data != NULL)
+  if (data != nullptr)
   {
     m_buffer.append(data, strlen(data));
   }
   else
   {
-    m_buffer.append("(null)", 6);
+    m_buffer.append("(nullptr)", 9);
   }
   return *this;
 }
@@ -148,3 +149,24 @@ void LogStream::formatInteger(T v)
   }
 }
 
+template<typename T>
+Fmt::Fmt(const char* fmt, T num)
+{
+  static_assert(std::is_arithmetic<T>::value == true, "data type is not arithmetic");
+  m_length = snprintf(m_buff, sizeof(m_buff), fmt, num);
+  XL_ASSERT(m_length < sizeof(m_buff));
+}
+
+template Fmt::Fmt(const char* fmt, char);
+
+template Fmt::Fmt(const char* fmt, short);
+template Fmt::Fmt(const char* fmt, unsigned short);
+template Fmt::Fmt(const char* fmt, int);
+template Fmt::Fmt(const char* fmt, unsigned int);
+template Fmt::Fmt(const char* fmt, long);
+template Fmt::Fmt(const char* fmt, unsigned long);
+template Fmt::Fmt(const char* fmt, long long);
+template Fmt::Fmt(const char* fmt, unsigned long long);
+
+template Fmt::Fmt(const char* fmt, float);
+template Fmt::Fmt(const char* fmt, double);
